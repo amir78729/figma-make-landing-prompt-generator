@@ -49,7 +49,12 @@ if [[ "$LANGUAGE" != "en-US" && "$LANGUAGE" != "fa-IR" ]]; then
 fi
 
 # Set template file based on language
-TEMPLATE_FILE="templates/$LANGUAGE.md"
+# Check if running from Homebrew installation
+if [[ -d "$(dirname "$0")/../share/figma-make/templates" ]]; then
+    TEMPLATE_FILE="$(dirname "$0")/../share/figma-make/templates/$LANGUAGE.md"
+else
+    TEMPLATE_FILE="templates/$LANGUAGE.md"
+fi
 
 OUTPUT_FILE="${OUTPUT:-figma-make-prompt-filled.md}"
 

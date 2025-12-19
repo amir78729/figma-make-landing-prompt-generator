@@ -12,7 +12,8 @@ figma-make/
 │   ├── en-US.md            # English template for landing page generation prompts
 │   └── fa-IR.md            # Persian template for landing page generation prompts
 ├── generate-prompt.sh      # Main script that processes templates
-├── README.md              # User documentation
+├── figma-make.rb          # Homebrew formula for installation
+├── README.md              # User documentation with installation and usage
 └── AI_CONTEXT.md         # This context file
 ```
 
@@ -43,8 +44,19 @@ figma-make/
   - `-h, --help` (show help message)
 - **Validation**: Invalid arguments throw errors, only en-US and fa-IR languages accepted
 - **Output**: `figma-make-prompt-filled.md`
+- **Installation Support**: Detects Homebrew installation and uses appropriate template paths
 
-### 3. Key Requirements from Template
+### 3. Homebrew Installation (`figma-make.rb`)
+- **Formula**: `figma-make.rb` - Homebrew formula for system-wide installation
+- **Repository**: https://github.com/amir78729/figma-make-landing-prompt-generator
+- **Version**: 0.0.1
+- **SHA256**: c98b6903961dd858495f50a41120d2e14bc7e1e93b2df37bd653ed5b7043c743
+- **Installation**: `brew tap amir78729/figma-make-landing-prompt-generator && brew install landing-prompt-gen`
+- **Command**: Installs as `landing-prompt-gen` system command
+- **Templates**: Installed to Homebrew's pkgshare directory
+- **Documentation**: Installation and usage instructions merged into README.md
+
+### 4. Key Requirements from Template
 - **RTL Layout**: Right-to-left direction, don't mirror icons
 - **Accessibility**: Persian ARIA labels, semantic HTML, WCAG compliance  
 - **Responsive**: Mobile/tablet/desktop breakpoints
@@ -85,4 +97,4 @@ When modifying any project file:
 4. Maintain accuracy of file structure and workflow descriptions
 
 ## Last Updated
-2025-12-19T16:05:19.786+03:30 - Added --output optional parameter to specify output file path
+2025-12-19T17:54:24.274+03:30 - Merged INSTALL.md into README.md, updated README with Homebrew installation and CLI usage
