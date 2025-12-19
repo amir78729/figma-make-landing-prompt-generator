@@ -59,6 +59,12 @@ The script generates a filled prompt file with:
 - `en-US` - English (default)
 - `fa-IR` - Persian/Farsi
 
+## Update
+
+```bash
+brew upgrade landing-prompt-gen
+```
+
 ## Uninstall
 
 ```bash
