@@ -24,6 +24,7 @@ figma-make/
 - **Tech Stack**: React + TypeScript + CSS Modules + DOMPurify
 - **Units**: All styles must use `rem` instead of `px`
 - **Assets**: Human-readable names instead of systematic hashes
+- **CMS Images**: Don't store API-provided images locally, use URLs from response
 - **Design System**: Tapsi design tokens (comprehensive CSS variables)
 - **Language**: RTL Persian (`fa-IR`) with accessibility requirements
 
@@ -70,4 +71,4 @@ When modifying any project file:
 4. Maintain accuracy of file structure and workflow descriptions
 
 ## Last Updated
-2025-12-19T14:01:34.694+03:30 - Added human-readable asset naming requirement
+2025-12-19T14:05:56.745+03:30 - Added CMS image handling requirement (don't store API images locally)

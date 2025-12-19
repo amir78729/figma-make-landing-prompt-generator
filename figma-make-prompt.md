@@ -31,6 +31,7 @@ You should generate a fully responsive React landing page based on the designs I
 - Implement fully responsive design for mobile, tablet, and desktop
 - **Use `rem` units for all length measurements** (never use `px`)
 - **Use human-readable names for all assets** (avoid systematic hashes for better development experience)
+- **Do not store CMS images in assets directory** - Images that come from API response should be referenced via URL, not stored locally
 
 ### Design Tokens
 
