@@ -23,6 +23,7 @@ figma-make/
   - `[API_RESPONSE_PLACEHOLDER]` → JSON API response structure
 - **Tech Stack**: React + TypeScript + CSS Modules + DOMPurify
 - **Units**: All styles must use `rem` instead of `px`
+- **Assets**: Human-readable names instead of systematic hashes
 - **Design System**: Tapsi design tokens (comprehensive CSS variables)
 - **Language**: RTL Persian (`fa-IR`) with accessibility requirements
 
@@ -69,4 +70,4 @@ When modifying any project file:
 4. Maintain accuracy of file structure and workflow descriptions
 
 ## Last Updated
-2025-12-19T13:56:36.316+03:30 - Added rem unit requirement for all CSS length measurements
+2025-12-19T14:01:34.694+03:30 - Added human-readable asset naming requirement
