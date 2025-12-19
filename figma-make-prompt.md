@@ -29,6 +29,7 @@ You should generate a fully responsive React landing page based on the designs I
 - Use CSS Modules for styling
 - Use DOMPurify for HTML sanitization
 - Implement fully responsive design for mobile, tablet, and desktop
+- **Use `rem` units for all length measurements** (never use `px`)
 
 ### Design Tokens
 
