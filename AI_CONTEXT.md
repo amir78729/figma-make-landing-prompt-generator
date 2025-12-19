@@ -34,10 +34,11 @@ figma-make/
 
 ### 2. Generator Script (`generate-prompt.sh`)
 - **Function**: Fetches API data and fills template placeholders
-- **Usage**: `./generate-prompt.sh --api=API_ENDPOINT [--lang=LANG] [--copy]`
+- **Usage**: `./generate-prompt.sh --api=API_ENDPOINT [--lang=LANG] [--output=FILE] [--copy]`
 - **Parameters**: 
   - `--api=API_ENDPOINT` (required)
   - `--lang=LANG` (optional, en-US default)
+  - `--output=FILE` (optional, defaults to figma-make-prompt-filled.md)
   - `--copy` (optional flag)
   - `-h, --help` (show help message)
 - **Validation**: Invalid arguments throw errors, only en-US and fa-IR languages accepted
@@ -84,4 +85,4 @@ When modifying any project file:
 4. Maintain accuracy of file structure and workflow descriptions
 
 ## Last Updated
-2025-12-19T16:01:52.177+03:30 - Moved templates to templates/ directory with language-based naming (en-US.md, fa-IR.md)
+2025-12-19T16:05:19.786+03:30 - Added --output optional parameter to specify output file path

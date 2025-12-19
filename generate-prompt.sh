@@ -3,15 +3,17 @@
 COPY_TO_CLIPBOARD=false
 LANGUAGE="en-US"
 ENDPOINT=""
+OUTPUT=""
 
 show_help() {
     echo "Figma Make Prompt Generator"
     echo ""
-    echo "Usage: $0 --api=API_ENDPOINT [--lang=LANG] [--copy]"
+    echo "Usage: $0 --api=API_ENDPOINT [--lang=LANG] [--output=FILE] [--copy]"
     echo ""
     echo "Options:"
     echo "  --api=API_ENDPOINT    API endpoint to fetch data from (required)"
     echo "  --lang=LANG          Set prompt language (en-US or fa-IR, defaults to en-US)"
+    echo "  --output=FILE        Output file path (defaults to figma-make-prompt-filled.md)"
     echo "  --copy               Copy the generated file contents to clipboard"
     echo "  -h, --help           Show this help message"
     echo ""
@@ -26,6 +28,7 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
         --api=*) ENDPOINT="${1#*=}"; shift ;;
         --lang=*) LANGUAGE="${1#*=}"; shift ;;
+        --output=*) OUTPUT="${1#*=}"; shift ;;
         --copy) COPY_TO_CLIPBOARD=true; shift ;;
         -h|--help) show_help; exit 0 ;;
         *) echo "❌ Error: Invalid argument '$1'"; echo "Use -h or --help for usage information"; exit 1 ;;
@@ -48,7 +51,7 @@ fi
 # Set template file based on language
 TEMPLATE_FILE="templates/$LANGUAGE.md"
 
-OUTPUT_FILE="figma-make-prompt-filled.md"
+OUTPUT_FILE="${OUTPUT:-figma-make-prompt-filled.md}"
 
 if [ ! -f "$TEMPLATE_FILE" ]; then
     echo "❌ Error: Template file '$TEMPLATE_FILE' not found"
