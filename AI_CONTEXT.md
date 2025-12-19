@@ -8,16 +8,17 @@ A bash script tool that generates filled prompts from templates by fetching API 
 ## Core Files Structure
 ```
 figma-make/
-├── figma-make-prompt.md     # English template for landing page generation prompts
-├── figma-make-prompt-fa.md  # Persian template for landing page generation prompts
-├── generate-prompt.sh       # Main script that processes templates
-├── README.md               # User documentation
-└── AI_CONTEXT.md          # This context file
+├── templates/
+│   ├── en-US.md            # English template for landing page generation prompts
+│   └── fa-IR.md            # Persian template for landing page generation prompts
+├── generate-prompt.sh      # Main script that processes templates
+├── README.md              # User documentation
+└── AI_CONTEXT.md         # This context file
 ```
 
 ## Key Components
 
-### 1. Template System (`figma-make-prompt.md` & `figma-make-prompt-fa.md`)
+### 1. Template System (`templates/en-US.md` & `templates/fa-IR.md`)
 - **Purpose**: Templates for generating React landing pages with RTL Persian support
 - **Languages**: English (en-US) and Persian (fa-IR) versions with identical content
 - **Translation Rule**: Technical terms (React, API, CSS, SSG, CTA, URL, HTML tags) remain English
@@ -83,4 +84,4 @@ When modifying any project file:
 4. Maintain accuracy of file structure and workflow descriptions
 
 ## Last Updated
-2025-12-19T15:20:57.202+03:30 - Added help functionality (-h, --help) to the script
+2025-12-19T16:01:52.177+03:30 - Moved templates to templates/ directory with language-based naming (en-US.md, fa-IR.md)

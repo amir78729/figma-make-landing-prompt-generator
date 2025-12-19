@@ -46,11 +46,7 @@ if [[ "$LANGUAGE" != "en-US" && "$LANGUAGE" != "fa-IR" ]]; then
 fi
 
 # Set template file based on language
-if [ "$LANGUAGE" = "fa-IR" ]; then
-    TEMPLATE_FILE="figma-make-prompt-fa.md"
-else
-    TEMPLATE_FILE="figma-make-prompt.md"
-fi
+TEMPLATE_FILE="templates/$LANGUAGE.md"
 
 OUTPUT_FILE="figma-make-prompt-filled.md"
 
