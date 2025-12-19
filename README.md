@@ -14,14 +14,14 @@ brew install landing-prompt-gen
 ## Usage
 
 ```bash
-landing-prompt-gen --api=API_ENDPOINT [--lang=LANG] [--output=FILE] [--copy]
+landing-prompt-gen --api=API_ENDPOINT --output=FILE [--lang=LANG] [--copy]
 ```
 
 ### Options
 
 - `--api=API_ENDPOINT` - API endpoint to fetch data from (required)
+- `--output=FILE` - Output file path (required)
 - `--lang=LANG` - Set prompt language (en-US or fa-IR, defaults to en-US)
-- `--output=FILE` - Output file path (defaults to figma-make-prompt-filled.md)
 - `--copy` - Copy the generated file contents to clipboard
 - `-h, --help` - Show help message
 
@@ -29,22 +29,22 @@ landing-prompt-gen --api=API_ENDPOINT [--lang=LANG] [--output=FILE] [--copy]
 
 Basic usage:
 ```bash
-landing-prompt-gen --api=https://api.example.com/data
+landing-prompt-gen --api=https://api.example.com/data --output=prompt.md
 ```
 
 Generate and copy to clipboard:
 ```bash
-landing-prompt-gen --api=https://api.example.com/data --copy
+landing-prompt-gen --api=https://api.example.com/data --output=prompt.md --copy
 ```
 
 Generate Persian prompt:
 ```bash
-landing-prompt-gen --api=https://api.example.com/data --lang=fa-IR
+landing-prompt-gen --api=https://api.example.com/data --output=prompt.md --lang=fa-IR
 ```
 
 Custom output file:
 ```bash
-landing-prompt-gen --api=https://api.example.com/data --output=my-prompt.md
+landing-prompt-gen --api=https://api.example.com/data --output=my-custom-prompt.md
 ```
 
 ## Output

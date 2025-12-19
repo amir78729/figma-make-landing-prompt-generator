@@ -34,15 +34,15 @@ figma-make/
 
 ### 2. Generator Script (`generate-prompt.sh`)
 - **Function**: Fetches API data and fills template placeholders
-- **Usage**: `./generate-prompt.sh --api=API_ENDPOINT [--lang=LANG] [--output=FILE] [--copy]`
+- **Usage**: `./generate-prompt.sh --api=API_ENDPOINT --output=FILE [--lang=LANG] [--copy]`
 - **Parameters**: 
   - `--api=API_ENDPOINT` (required)
+  - `--output=FILE` (required)
   - `--lang=LANG` (optional, en-US default)
-  - `--output=FILE` (optional, defaults to figma-make-prompt-filled.md)
   - `--copy` (optional flag)
   - `-h, --help` (show help message)
 - **Validation**: Invalid arguments throw errors, only en-US and fa-IR languages accepted
-- **Output**: `figma-make-prompt-filled.md`
+- **Output**: User-specified file via --output parameter
 - **Installation Support**: Detects Homebrew installation and uses appropriate template paths
 
 ### 3. Homebrew Installation
@@ -65,17 +65,18 @@ figma-make/
 - **Architecture**: Component-based with TypeScript types from API
 
 ## Script Workflow
-1. Parse command line arguments (--api, --lang, --copy)
+1. Parse command line arguments (--api, --output, --lang, --copy)
 2. Validate all arguments (reject invalid parameters)
 3. Validate required --api parameter exists
-4. Validate language parameter (en-US or fa-IR only)
-5. Select appropriate template file based on language
-6. Validate template file exists
-7. Fetch API response via curl
-8. Replace `[ENDPOINT_PLACEHOLDER]` with actual endpoint
-9. Replace `[API_RESPONSE_PLACEHOLDER]` with API JSON response
-10. Generate `figma-make-prompt-filled.md`
-11. Optionally copy to clipboard (macOS pbcopy)
+4. Validate required --output parameter exists
+5. Validate language parameter (en-US or fa-IR only)
+6. Select appropriate template file based on language
+7. Validate template file exists
+8. Fetch API response via curl
+9. Replace `[ENDPOINT_PLACEHOLDER]` with actual endpoint
+10. Replace `[API_RESPONSE_PLACEHOLDER]` with API JSON response
+11. Generate user-specified output file
+12. Optionally copy to clipboard (macOS pbcopy)
 
 ## Dependencies
 - `curl` - API requests
@@ -97,4 +98,4 @@ When modifying any project file:
 4. Maintain accuracy of file structure and workflow descriptions
 
 ## Last Updated
-2025-12-19T18:02:13.653+03:30 - Removed figma-make.rb from main repo, moved to separate tap repository as landing-prompt-gen.rb
+2025-12-19T18:16:16.409+03:30 - Made --output parameter required, updated help message and validation

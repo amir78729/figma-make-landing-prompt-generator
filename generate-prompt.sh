@@ -8,20 +8,20 @@ OUTPUT=""
 show_help() {
     echo "Figma Make Prompt Generator"
     echo ""
-    echo "Usage: $0 --api=API_ENDPOINT [--lang=LANG] [--output=FILE] [--copy]"
+    echo "Usage: landing-prompt-gen --api=API_ENDPOINT --output=FILE [--lang=LANG] [--copy]"
     echo ""
     echo "Options:"
     echo "  --api=API_ENDPOINT    API endpoint to fetch data from (required)"
+    echo "  --output=FILE        Output file path (required)"
     echo "  --lang=LANG          Set prompt language (en-US or fa-IR, defaults to en-US)"
-    echo "  --output=FILE        Output file path (defaults to figma-make-prompt-filled.md)"
     echo "  --copy               Copy the generated file contents to clipboard"
     echo "  -h, --help           Show this help message"
     echo ""
     echo "Examples:"
-    echo "  $0 --api=https://api.example.com/data"
-    echo "  $0 --api=https://api.example.com/data --copy"
-    echo "  $0 --api=https://api.example.com/data --lang=fa-IR"
-    echo "  $0 --api=https://api.example.com/data --lang=fa-IR --copy"
+    echo "  landing-prompt-gen --api=https://api.example.com/data --output=prompt.md"
+    echo "  landing-prompt-gen --api=https://api.example.com/data --output=prompt.md --copy"
+    echo "  landing-prompt-gen --api=https://api.example.com/data --output=prompt.md --lang=fa-IR"
+    echo "  landing-prompt-gen --api=https://api.example.com/data --output=prompt.md --lang=fa-IR --copy"
 }
 
 while [[ "$#" -gt 0 ]]; do
@@ -42,6 +42,13 @@ if [ -z "$ENDPOINT" ]; then
     exit 1
 fi
 
+if [ -z "$OUTPUT" ]; then
+    echo "❌ Error: --output parameter is required"
+    echo ""
+    show_help
+    exit 1
+fi
+
 # Validate language
 if [[ "$LANGUAGE" != "en-US" && "$LANGUAGE" != "fa-IR" ]]; then
     echo "❌ Error: Invalid language '$LANGUAGE'. Valid languages are: en-US, fa-IR"
@@ -56,7 +63,7 @@ else
     TEMPLATE_FILE="templates/$LANGUAGE.md"
 fi
 
-OUTPUT_FILE="${OUTPUT:-figma-make-prompt-filled.md}"
+OUTPUT_FILE="$OUTPUT"
 
 if [ ! -f "$TEMPLATE_FILE" ]; then
     echo "❌ Error: Template file '$TEMPLATE_FILE' not found"
