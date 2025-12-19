@@ -8,7 +8,8 @@ A bash script tool that generates filled prompts from templates by fetching API 
 ## Core Files Structure
 ```
 figma-make/
-├── figma-make-prompt.md     # Template for landing page generation prompts
+├── figma-make-prompt.md     # English template for landing page generation prompts
+├── figma-make-prompt-fa.md  # Persian template for landing page generation prompts
 ├── generate-prompt.sh       # Main script that processes templates
 ├── README.md               # User documentation
 └── AI_CONTEXT.md          # This context file
@@ -16,8 +17,10 @@ figma-make/
 
 ## Key Components
 
-### 1. Template System (`figma-make-prompt.md`)
-- **Purpose**: Template for generating React landing pages with RTL Persian support
+### 1. Template System (`figma-make-prompt.md` & `figma-make-prompt-fa.md`)
+- **Purpose**: Templates for generating React landing pages with RTL Persian support
+- **Languages**: English (en-US) and Persian (fa-IR) versions with identical content
+- **Translation Rule**: Technical terms (React, API, CSS, SSG, CTA, URL, HTML tags) remain English
 - **Placeholders**: 
   - `[ENDPOINT_PLACEHOLDER]` → API endpoint URL
   - `[API_RESPONSE_PLACEHOLDER]` → JSON API response structure
@@ -30,9 +33,14 @@ figma-make/
 
 ### 2. Generator Script (`generate-prompt.sh`)
 - **Function**: Fetches API data and fills template placeholders
-- **Usage**: `./generate-prompt.sh [-c|--copy] <API_ENDPOINT>`
+- **Usage**: `./generate-prompt.sh --api=API_ENDPOINT [--lang=LANG] [--copy]`
+- **Parameters**: 
+  - `--api=API_ENDPOINT` (required)
+  - `--lang=LANG` (optional, en-US default)
+  - `--copy` (optional flag)
+  - `-h, --help` (show help message)
+- **Validation**: Invalid arguments throw errors, only en-US and fa-IR languages accepted
 - **Output**: `figma-make-prompt-filled.md`
-- **Features**: Optional clipboard copy with `-c/--copy` flag
 
 ### 3. Key Requirements from Template
 - **RTL Layout**: Right-to-left direction, don't mirror icons
@@ -43,13 +51,17 @@ figma-make/
 - **Architecture**: Component-based with TypeScript types from API
 
 ## Script Workflow
-1. Parse command line arguments (endpoint + optional copy flag)
-2. Validate template file exists
-3. Fetch API response via curl
-4. Replace `[ENDPOINT_PLACEHOLDER]` with actual endpoint
-5. Replace `[API_RESPONSE_PLACEHOLDER]` with API JSON response
-6. Generate `figma-make-prompt-filled.md`
-7. Optionally copy to clipboard (macOS pbcopy)
+1. Parse command line arguments (--api, --lang, --copy)
+2. Validate all arguments (reject invalid parameters)
+3. Validate required --api parameter exists
+4. Validate language parameter (en-US or fa-IR only)
+5. Select appropriate template file based on language
+6. Validate template file exists
+7. Fetch API response via curl
+8. Replace `[ENDPOINT_PLACEHOLDER]` with actual endpoint
+9. Replace `[API_RESPONSE_PLACEHOLDER]` with API JSON response
+10. Generate `figma-make-prompt-filled.md`
+11. Optionally copy to clipboard (macOS pbcopy)
 
 ## Dependencies
 - `curl` - API requests
@@ -71,4 +83,4 @@ When modifying any project file:
 4. Maintain accuracy of file structure and workflow descriptions
 
 ## Last Updated
-2025-12-19T14:05:56.745+03:30 - Added CMS image handling requirement (don't store API images locally)
+2025-12-19T15:20:57.202+03:30 - Added help functionality (-h, --help) to the script

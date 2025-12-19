@@ -1,19 +1,57 @@
 #!/bin/bash
 
 COPY_TO_CLIPBOARD=false
+LANGUAGE="en-US"
+ENDPOINT=""
+
+show_help() {
+    echo "Figma Make Prompt Generator"
+    echo ""
+    echo "Usage: $0 --api=API_ENDPOINT [--lang=LANG] [--copy]"
+    echo ""
+    echo "Options:"
+    echo "  --api=API_ENDPOINT    API endpoint to fetch data from (required)"
+    echo "  --lang=LANG          Set prompt language (en-US or fa-IR, defaults to en-US)"
+    echo "  --copy               Copy the generated file contents to clipboard"
+    echo "  -h, --help           Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  $0 --api=https://api.example.com/data"
+    echo "  $0 --api=https://api.example.com/data --copy"
+    echo "  $0 --api=https://api.example.com/data --lang=fa-IR"
+    echo "  $0 --api=https://api.example.com/data --lang=fa-IR --copy"
+}
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        -c|--copy) COPY_TO_CLIPBOARD=true; shift ;;
-        *) ENDPOINT="$1"; shift ;;
+        --api=*) ENDPOINT="${1#*=}"; shift ;;
+        --lang=*) LANGUAGE="${1#*=}"; shift ;;
+        --copy) COPY_TO_CLIPBOARD=true; shift ;;
+        -h|--help) show_help; exit 0 ;;
+        *) echo "❌ Error: Invalid argument '$1'"; echo "Use -h or --help for usage information"; exit 1 ;;
     esac
 done
 
 if [ -z "$ENDPOINT" ]; then
-    echo "ℹ️ Usage: $0 [-c|--copy] <API_ENDPOINT>"
+    echo "❌ Error: --api parameter is required"
+    echo ""
+    show_help
     exit 1
 fi
-TEMPLATE_FILE="figma-make-prompt.md"
+
+# Validate language
+if [[ "$LANGUAGE" != "en-US" && "$LANGUAGE" != "fa-IR" ]]; then
+    echo "❌ Error: Invalid language '$LANGUAGE'. Valid languages are: en-US, fa-IR"
+    exit 1
+fi
+
+# Set template file based on language
+if [ "$LANGUAGE" = "fa-IR" ]; then
+    TEMPLATE_FILE="figma-make-prompt-fa.md"
+else
+    TEMPLATE_FILE="figma-make-prompt.md"
+fi
+
 OUTPUT_FILE="figma-make-prompt-filled.md"
 
 if [ ! -f "$TEMPLATE_FILE" ]; then
@@ -25,11 +63,11 @@ echo "⏳ Fetching API response from: $ENDPOINT"
 API_RESPONSE=$(curl -s "$ENDPOINT")
 
 if [ $? -ne 0 ]; then
-    echo "Error: Failed to fetch API response"
+    echo "❌ Error: Failed to fetch API response"
     exit 1
 fi
 
-echo "✨ Generating filled prompt..."
+echo "✨ Generating filled prompt (Language: $LANGUAGE)..."
 
 # Create temp file with API response
 TEMP_RESPONSE=$(mktemp)
